@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import axios from "axios";
-import HttpsProxyAgent from "https-proxy-agent";
 
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -37,12 +36,7 @@ const App = () => {
     } else {
       setSearchInputError("");
       try {
-        const { data } = await axios.get(getFormattedApi(search), {
-          proxy: false,
-          httpsAgent: new HttpsProxyAgent.HttpsProxyAgent(
-            `https://localhost:4000`
-          ),
-        });
+        const { data } = await axios.get(getFormattedApi(search));
         console.log(data);
       } catch (error) {
         alert("При запросе к АПИ произошла ошибка");
